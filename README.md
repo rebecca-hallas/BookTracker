@@ -17,7 +17,8 @@ npx knex seed:run
 
 ## Requests
 
-This programme begins running in the 'Please' file (named so that when a request is made to the terminal, it is made politely!
+This programme begins running in the 'Please' file (named so that when a request is made to the terminal, it is made politely!)
+
 All requests should begin with:
 
 ```

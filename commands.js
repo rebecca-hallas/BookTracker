@@ -5,7 +5,8 @@ const db = require ('./db')
 module.exports = {
     listBooks,
     deleteBook,
-    addBook
+    addBook,
+    editBook
 }
 
 // List all of the books to be read
@@ -25,7 +26,7 @@ function listBooks() {
 
 function printBooks (books) {
     books.forEach(book => {
-        console.info(`${book.id}: ${book.book}`)
+        console.info(`Book ${book.id}: ${book.book}`)
     })
 }
 
@@ -68,5 +69,18 @@ function addBook(id, bookInfo) {
 
 function confirmAddedBook() {
     console.log('Happy Reading!')
+}
+
+function editBook(id, editedBook) {
+    return db.editBookDetails(id, editedBook)
+    .then(() => {
+        return null
+    })
+    .catch(err => {
+        logError(err)
+    })
+    .finally(() => {
+        db.close()
+    })
 }
 

@@ -20,8 +20,17 @@ function addNewBook (id, bookInfo, db = database) {
     return db('toread')
     .insert({ id: id, book: bookInfo, done: 0 })
     .into('toread')
-    .then((ids) => {
+    .then(() => {
         console.log('You have added:', bookInfo)
+    })
+}
+
+function editBookDetails (id, editedBook, db = database) {
+    return db('toread')
+    .where({ id: id})
+    .update({ book: editedBook })
+    .then(() => {
+        console.log('Your new book details are:', 'Book', id + ':', editedBook)
     })
 }
 
@@ -30,5 +39,6 @@ module.exports = {
     getBooksToRead,
     close,
     finishBook,
-    addNewBook
+    addNewBook,
+    editBookDetails
 }

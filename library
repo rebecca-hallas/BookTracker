@@ -4,10 +4,18 @@ const commands = require('./commands')
 
 const userInputs = process.argv
 const cmd = userInputs[2]
+const id = userInputs[3]
+const bookInfo = userInputs[4]
 
 switch (cmd) {
   case 'listBooks':
     commands.listBooks()
+    break
+    case 'deleteBook':
+    commands.deleteBook(id)
+    break
+    case 'addBook':
+    commands.addBook(id, bookInfo)
     break
 
   default:

@@ -1,6 +1,13 @@
 // Requiring the database functions file
 const db = require ('./db')
 
+
+module.exports = {
+    listBooks,
+    deleteBook,
+    addBook
+}
+
 // List all of the books to be read
 function listBooks() {
     return db.getBooksToRead()
@@ -45,7 +52,21 @@ function confirmFinished() {
     console.log('You have finished this book. It has been removed from your list of books to read.')
 }
 
-module.exports = {
-    listBooks,
-    deleteBook
+function addBook(id, bookInfo) {
+    return db.addNewBook(id, bookInfo)
+    .then(() => {
+        confirmAddedBook()
+        return null
+    })
+    .catch(err => {
+        logError(err)
+    })
+    .finally(() => {
+        db.close()
+    })
 }
+
+function confirmAddedBook() {
+    console.log('Happy Reading!')
+}
+

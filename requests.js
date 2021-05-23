@@ -2,13 +2,13 @@
 const db = require ('./db')
 
 module.exports = {
-    listBooks,
+    list,
     remove,
     add,
     edit
 }
 
-function listBooks() {
+function list() {
     return db.getBooks()
     .then(books => {
         listBookInfo(books)
@@ -29,7 +29,7 @@ function listBookInfo (books) {
 }
 
 function logError(err) {
-    console.error('Whoops! Something went wrong!', err.message)
+    console.error('Uh oh, something has gone wrong. Please read the error message:', err.message)
 }
 
 function remove (id) {
@@ -60,9 +60,10 @@ function add (id, title, author) {
     })
 }
 
-function edit(id, title, author) {
+function edit (id, title, author) {
     return db.editBookDetails(id, title, author)
     .then(() => {
+        listBooks()
         return null
     })
     .catch(err => {

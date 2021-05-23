@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 
-const commands = require('./terminalcommands')
+const commands = require('./requests')
 
 const userInputs = process.argv
 const cmd = userInputs[2]
 const id = userInputs[3]
 const title = userInputs[4]
 const author = userInputs [5]
-const editedBook = userInputs[4]
 
 switch (cmd) {
-  case 'listBooks':
-    commands.listBooks()
+  case 'list':
+    commands.list()
     break
     case 'remove':
     commands.remove(id)

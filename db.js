@@ -33,7 +33,7 @@ function editBookDetails (id, title, author, db = database) {
     .where({ id: id})
     .update({ title: title, author: author })
     .then(() => {
-        console.log(`You have updated Book ${id}: '${title}' by ${author}.`)
+        console.log(`You have updated Book ${id}: '${title}' by ${author}. Your list of books to read is now:`)
     })
 }
 

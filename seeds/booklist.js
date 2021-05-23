@@ -2,8 +2,8 @@ exports.seed = function(knex) {
   return knex('library').del()
     .then(function () {
       return knex('library').insert([
-        {id: 1, title: 'The Ballad of Songbirds and Snakes', author: 'Suzanne Collins' },
-        {id: 2, title: 'Me', author: 'Elton John'},
+        {id: 1, title: 'A Life on Our Planet', author: 'David Attenborough' },
+        {id: 2, title: 'Where the Crawdads Sing', author: 'Delia Owens'},
         {id: 3, title: 'Normal People', author: 'Sally Rooney'}
       ]);
     });

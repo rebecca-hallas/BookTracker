@@ -35,7 +35,7 @@ function logError(err) {
 function remove (id) {
     return db.finishBook(id)
     .then(() => {
-        listBooks()
+        list()
         return null
     })
     .catch(err => {
@@ -49,7 +49,7 @@ function remove (id) {
 function add (id, title, author) {
     return db.addNewBook(id, title, author)
     .then(() => {
-        listBooks()
+        listBookInfo()
         return null
     })
     .catch(err => {
@@ -63,7 +63,7 @@ function add (id, title, author) {
 function edit (id, title, author) {
     return db.editBookDetails(id, title, author)
     .then(() => {
-        listBooks()
+        list()
         return null
     })
     .catch(err => {

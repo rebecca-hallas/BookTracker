@@ -1,32 +1,30 @@
 // Requiring the database functions file
 const db = require ('./db')
 
-
 module.exports = {
     listBooks,
-    deleteBook,
-    addBook,
-    editBook
+    remove,
+    add,
+    edit
 }
 
-// List all of the books to be read
 function listBooks() {
-    return db.getBooksToRead()
+    return db.getBooks()
     .then(books => {
-        printBooks(books)
+        listBookInfo(books)
         return null
     })
     .catch(err => {
         logError(err)
     })
     .finally(() => {
-        db.close()
+        db.end()
     })
 }
 
-function printBooks (books) {
+function listBookInfo (books) {
     books.forEach(book => {
-        console.info(`Book ${book.id}: ${book.book}`)
+        console.info(`Book ${book.id}: '${book.title}' by ${book.author}`)
     })
 }
 
@@ -34,45 +32,36 @@ function logError(err) {
     console.error('Whoops! Something went wrong!', err.message)
 }
 
-// Delete a book
-function deleteBook (id) {
+function remove (id) {
     return db.finishBook(id)
-    .then(toread => {
-        confirmFinished()
-        return null
-    })
-    .catch(err => {
-        logError(err)
-    })
-    .finally(() => {
-        db.close()
-    })
-}
-
-function confirmFinished() {
-    console.log('You have finished this book. It has been removed from your list of books to read.')
-}
-
-function addBook(id, bookInfo) {
-    return db.addNewBook(id, bookInfo)
     .then(() => {
-        confirmAddedBook()
+        listBooks()
         return null
     })
     .catch(err => {
         logError(err)
     })
     .finally(() => {
-        db.close()
+        db.end()
     })
 }
 
-function confirmAddedBook() {
-    console.log('Happy Reading!')
+function add (id, title, author) {
+    return db.addNewBook(id, title, author)
+    .then(() => {
+        listBooks()
+        return null
+    })
+    .catch(err => {
+        logError(err)
+    })
+    .finally(() => {
+        db.end()
+    })
 }
 
-function editBook(id, editedBook) {
-    return db.editBookDetails(id, editedBook)
+function edit(id, title, author) {
+    return db.editBookDetails(id, title, author)
     .then(() => {
         return null
     })
@@ -80,7 +69,7 @@ function editBook(id, editedBook) {
         logError(err)
     })
     .finally(() => {
-        db.close()
+        db.end()
     })
 }
 

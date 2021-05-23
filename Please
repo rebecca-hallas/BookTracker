@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+const commands = require('./terminalcommands')
+
+const userInputs = process.argv
+const cmd = userInputs[2]
+const id = userInputs[3]
+const title = userInputs[4]
+const author = userInputs [5]
+const editedBook = userInputs[4]
+
+switch (cmd) {
+  case 'listBooks':
+    commands.listBooks()
+    break
+    case 'remove':
+    commands.remove(id)
+    break
+    case 'add':
+    commands.add(id, title, author)
+    break
+    case 'edit':
+    commands.edit(id, title, author)
+    break
+
+  default:
+    console.log(`Sorry, I don't understand what '${cmd}' means.`)
+}

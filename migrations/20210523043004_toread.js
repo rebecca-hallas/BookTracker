@@ -2,8 +2,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable('toread', function (table) {
       table.increments('id')
-      table.string('book')
-      table.boolean('done')
+      table.string('title')
+      table.string('author')
   })
 };
 

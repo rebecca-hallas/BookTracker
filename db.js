@@ -1,43 +1,46 @@
 const config = require('./knexfile').development
 const database = require('knex')(config)
 
-// List the books to be read
-function getBooksToRead (db = database) {
-    return db('toread').select()
+function getBooks (db = database) {
+    return db('library').select()
 }
 
-function close (db = database) {
+function end (db = database) {
     db.destroy()
-  }
+}
 
 function finishBook (id, db = database) {
-    return db('toread')
+    return db('library')
+    .select()
     .where ('id', id)
     .del()
-}
-
-function addNewBook (id, bookInfo, db = database) {
-    return db('toread')
-    .insert({ id: id, book: bookInfo, done: 0 })
-    .into('toread')
     .then(() => {
-        console.log('You have added:', bookInfo)
+        console.log(`You have finished Book ${id}. It has been removed from your library. Your list of books to read is now:`)
     })
 }
 
-function editBookDetails (id, editedBook, db = database) {
-    return db('toread')
-    .where({ id: id})
-    .update({ book: editedBook })
+function addNewBook (id, title, author, db = database) {
+    return db('library')
+    .insert({ id: id, title: title, author: author })
+    .into('library')
     .then(() => {
-        console.log('Your new book details are:', 'Book', id + ':', editedBook)
+        console.log(`You have added Book ${id}: ${title} by ${author}. Your list of books to read is now:`)
+    })
+}
+
+function editBookDetails (id, title, author, db = database) {
+    return db('library')
+    .where({ id: id})
+    .update({ title: title, author: author })
+    .then(() => {
+        console.log(`You have updated Book ${id}: '${title}' by ${author}.`)
     })
 }
 
 // Exporting the functions to be called elsewhere
 module.exports = {
-    getBooksToRead,
-    close,
+    getBooks,
+    end,
     finishBook,
     addNewBook,
     editBookDetails

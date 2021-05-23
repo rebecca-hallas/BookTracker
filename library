@@ -23,5 +23,5 @@ switch (cmd) {
     break
 
   default:
-    console.log(`I don't understand that command: ${cmd}`)
+    console.log(`I don't understand: ${cmd}`)
 }

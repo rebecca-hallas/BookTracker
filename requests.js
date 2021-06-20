@@ -22,12 +22,6 @@ function list() {
     })
 }
 
-function listBookInfo (books) {
-    books.forEach(book => {
-        console.info(`Book ${book.id}: '${book.title}' by ${book.author}`)
-    })
-}
-
 function logError(err) {
     console.error('Uh oh, something has gone wrong. Please read the error message:', err.message)
 }
@@ -49,7 +43,7 @@ function remove (id) {
 function add (id, title, author) {
     return db.addNewBook(id, title, author)
     .then(() => {
-        listBookInfo()
+        list()
         return null
     })
     .catch(err => {

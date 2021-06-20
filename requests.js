@@ -22,6 +22,12 @@ function list() {
     })
 }
 
+function listBookInfo (books) {
+    books.forEach(book => {
+        console.info(`Book ${book.id}: '${book.title}' by ${book.author}`)
+    })
+}
+
 function logError(err) {
     console.error('Uh oh, something has gone wrong. Please read the error message:', err.message)
 }
